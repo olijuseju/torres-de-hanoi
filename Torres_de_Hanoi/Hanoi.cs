@@ -21,38 +21,91 @@ namespace Torres_de_Hanoi
                 {
                     Disco disco = a.pop();
                     b.push(disco);
-                    Console.WriteLine("Moviendo primer disco de A a B");
+                    Console.WriteLine("Moviendo disco de A a B");
                 }
 
             }else if(a.isEmpty())
             {
                 Disco disco = b.pop();
                 a.push(disco);
-                Console.WriteLine("Moviendo primer disco de B a A");
+                Console.WriteLine("Moviendo disco de B a A");
             } else
             {
-                if(a.Top.Valor == b.Top.Valor)
-                {
-                    Console.WriteLine("Caso imposible, dos discos iguales");
-                }
                 if(a.Top.Valor > b.Top.Valor)
                 {
                     Disco disco = b.pop();
                     a.push(disco);
-                    Console.WriteLine("Moviendo primer disco de B a A");
+                    Console.WriteLine("Moviendo disco de B a A");
                 }
                 else
                 {
                     Disco disco = a.pop();
                     b.push(disco);
-                    Console.WriteLine("Moviendo primer disco de A a B");
+                    Console.WriteLine("Moviendo disco de A a B");
                 }
             }
         }
 
         public int iterativo(int n, Pila ini, Pila fin, Pila aux)
         {
-            return 0;
+            int movimientos = 0;
+            bool solucion = false;
+            if(n%2 == 0)
+            {
+                while (!solucion)
+                {
+                    /*incrementar movimientos(m) ← mover disco(INI, F IN)
+                      6: incrementar movimientos(m) ← mover disco(INI, AUX)
+                      7: incrementar movimientos(m) ← mover disco(AUX, FIN)*/
+
+                    movimientos++;
+                    Console.WriteLine("Movimiento inicio a fin");
+                    mover_disco(ini, fin);
+
+                    movimientos++;
+                    Console.WriteLine("Movimiento inicio a aux");
+                    mover_disco(ini, aux);
+
+                    movimientos++;
+                    Console.WriteLine("Movimiento aux a fin");
+                    mover_disco(aux, fin);
+
+                    if(fin.Size == n)
+                    {
+                        //Si la pila final tiene todos los discos, paramos el programa
+                        solucion = true;
+                    }
+                }
+            }
+            else
+            {
+                /*incrementar movimientos(m) ← mover disco(INI, AUX)
+                  incrementar movimientos(m) ← mover disco(INI, F IN)
+                  incrementar movimientos(m) ← mover disco(AUX, F IN)*/
+
+                movimientos++;
+                Console.WriteLine("Movimiento inicio a aux");
+
+                mover_disco(ini, aux);
+
+                movimientos++;
+                Console.WriteLine("Movimiento inicio a fin");
+
+                mover_disco(ini, fin);
+
+                movimientos++;
+                Console.WriteLine("Movimiento aux a fin");
+                mover_disco(aux, fin);
+
+                if (fin.Size == n)
+                {
+                    //Si la pila final tiene todos los discos, paramos el programa
+                    solucion = true;
+                }
+
+            }
+
+            return movimientos;
         }
 
     }

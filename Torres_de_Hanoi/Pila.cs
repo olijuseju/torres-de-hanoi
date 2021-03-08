@@ -18,9 +18,8 @@ namespace Torres_de_Hanoi
 
 
         /* TODO: Implementar métodos */
-        public Pila(int size)
+        public Pila()
         {
-            Size = size;
             Elementos = new List<Disco>();
         }
 
@@ -28,24 +27,25 @@ namespace Torres_de_Hanoi
         {
             Elementos.Add(d);
             Top = d;
+            Size = Elementos.Count();
         }
 
         public Disco pop()
         {
-            Disco disco = Top;
-            Elementos.Remove(Top);
-
-            if (this.isEmpty())
+            if (!this.isEmpty())
             {
-                Top = new Disco(0);
+                Disco disco = Top;
+                Elementos.Remove(Top);
+                Top = Elementos.Last();
+                Size = Elementos.Count();
+                return disco;
             }
             else
             {
-                Top = Elementos[Elementos.Count - 1];
+                //Caso imposible, sacar un disco de una pila vacía
+                Console.WriteLine("ERROR: Sacar un disco de una pila Vacía");
+                return new Disco(0);
             }
-
-            return disco;
-
         }
 
         public bool isEmpty()
