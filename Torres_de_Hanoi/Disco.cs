@@ -8,22 +8,13 @@ namespace Torres_de_Hanoi
 {
     class Disco
     {
-        public int Valor;
+        //Variable valor
+        public int Valor { get; set; }
 
-
-        public Disco(int Valor)
+        //Constructor
+        public Disco(int valor)
         {
-            this.Valor = Valor;
-        }
-
-        public int getValor()
-        {
-            return Valor;
-        }
-
-        public void setValor(int Valor)
-        {
-            this.Valor = Valor;
+            this.Valor = valor;
         }
 
     }
