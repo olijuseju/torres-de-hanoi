@@ -18,26 +18,43 @@ namespace Torres_de_Hanoi
 
 
         /* TODO: Implementar métodos */
+        public Pila(List<Disco> lista)
+        {
+            Elementos = lista;
+            Top = lista.Last();
+            Size = lista.Count();
+        }
+
         public Pila()
         {
             Elementos = new List<Disco>();
+            Top = new Disco(0);
+            Size = 0;
         }
 
         public void push(Disco d)
         {
             Elementos.Add(d);
             Top = d;
-            Size = Elementos.Count();
+            Size ++;
         }
 
         public Disco pop()
         {
-            if (!this.isEmpty())
+            if (Size > 0)
             {
                 Disco disco = Top;
                 Elementos.Remove(Top);
-                Top = Elementos.Last();
-                Size = Elementos.Count();
+                if (this.isEmpty())
+                {
+                    Top = new Disco(0);
+                    Size = 0;
+                }
+                else
+                {
+                    Top = this.Elementos.Last();
+                    Size --;
+                }
                 return disco;
             }
             else
@@ -50,8 +67,13 @@ namespace Torres_de_Hanoi
 
         public bool isEmpty()
         {
+            if (Elementos.Count < 0)
+            {
+                Console.WriteLine("ERROR: Numero de elementos negativo");
+                return true;
+            }
 
-            if (Elementos.Count == 0)
+            if (Elementos.Count() == 0)
             {
                 return true;
             }

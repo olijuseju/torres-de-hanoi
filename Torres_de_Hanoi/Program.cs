@@ -11,31 +11,27 @@ namespace Torres_de_Hanoi
         static void Main(string[] args)
         {
 
-            // Keep the console window open in debug mode.
             Console.WriteLine("Buenos días, inserte el número de discos por favor :)");
             int totalDiscos = Int32.Parse(Console.ReadLine());
+            int formula = (int)(Math.Pow(2, totalDiscos) - 1);
+            List<Disco> Elementos = new List<Disco>();
+            for (int i=totalDiscos; i>0; i--)
+            {
+                Elementos.Add(new Disco(i));
+            }
 
-            Pila pilaIni = new Pila();
+            Pila pilaIni = new Pila(Elementos);
             Pila pilaAux = new Pila();
             Pila pilaFin = new Pila();
 
-            for (int i=totalDiscos; i>0; i--)
-            {
-                pilaIni.Elementos.Add(new Disco(i));
-                Console.WriteLine(i);
-            }
-
-            
-
-            Console.WriteLine(pilaAux.Elementos.Count());
 
             Hanoi El_problema_de_hanoi = new Hanoi();
 
-            int numMovimientos = El_problema_de_hanoi.iterativo(totalDiscos, pilaIni, pilaAux, pilaFin);
+            int numMovimientos = El_problema_de_hanoi.iterativo(totalDiscos, pilaIni, pilaFin, pilaAux);
 
-            Console.WriteLine("El problema se ha resuelto en " + numMovimientos + " movimientos.");
+            Console.WriteLine("El problema con " + totalDiscos + " discos se ha resuelto en " + numMovimientos + " movimientos.");
 
-            if (numMovimientos == (2 ^ totalDiscos) - 1)
+            if (numMovimientos ==  formula)
             {
                 Console.WriteLine("El problema se ha resuelto bien :)");
             }
