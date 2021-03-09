@@ -6,8 +6,11 @@ using System.Threading.Tasks;
 
 namespace Torres_de_Hanoi
 {
+    
     class Hanoi
     {
+        public int m;
+
         /*TODO: Implementar métodos*/
         public void mover_disco(Pila a, Pila b)
         {
@@ -129,6 +132,39 @@ namespace Torres_de_Hanoi
             }
 
             return movimientos;
+        }
+
+
+        public int recursivo(int n, Pila ini, Pila fin, Pila aux)
+        {
+            
+            /*
+                1: ENTRADA: n, INI, F IN, AUX
+                2: SALIDA: m
+                3: si n = 1:
+                4: incrementar movimientos(m) ← mover disco(INI, F IN)
+                5: sino:
+                6: algoritmo recursivo(n − 1, INI, AUX, F IN)
+                7: incrementar movimientos(m) ← mover disco(INI, F IN)
+                8: algoritmo recursivo(n − 1, AUX, F IN, INI)
+                9: fin si
+                10: devuelve m
+             */
+            if (n == 1)
+            {
+                m++;
+                mover_disco(ini, fin);
+            }
+            else
+            {
+                recursivo(n - 1, ini, aux, fin);
+                m++;
+                mover_disco(ini, fin);
+                recursivo(n - 1, aux, fin, ini);
+            }
+
+
+            return m;
         }
 
     }
