@@ -135,9 +135,9 @@ namespace Torres_de_Hanoi
         }
 
 
-        public int recursivo(int n, Pila ini, Pila fin, Pila aux)
+        public int Recursivo(int n, Pila ini, Pila fin, Pila aux)
         {
-            
+
             /*
                 1: ENTRADA: n, INI, F IN, AUX
                 2: SALIDA: m
@@ -150,21 +150,24 @@ namespace Torres_de_Hanoi
                 9: fin si
                 10: devuelve m
              */
+
+
             if (n == 1)
             {
                 m++;
                 mover_disco(ini, fin);
+                return m;
             }
             else
             {
-                recursivo(n - 1, ini, aux, fin);
+                Recursivo(n - 1, ini, aux, fin);
                 m++;
                 mover_disco(ini, fin);
-                recursivo(n - 1, aux, fin, ini);
+                Recursivo(n - 1, aux, fin, ini);
             }
 
-
             return m;
+
         }
 
     }
